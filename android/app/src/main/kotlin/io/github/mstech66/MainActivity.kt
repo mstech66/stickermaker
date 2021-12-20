@@ -1,4 +1,4 @@
-package dev.applicazza.flutter.plugins.whatsapp_stickers_example
+package io.github.mstech66
 
 import io.flutter.embedding.android.FlutterActivity
 
