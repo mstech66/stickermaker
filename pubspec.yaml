@@ -20,6 +20,8 @@ dependencies:
   file_picker: ^2.1.7
   whatsapp_stickers: ^0.0.4
   change_app_package_name: ^1.0.0
+  flutter_image_compress: ^1.0.0
+  image: ^3.1.0
 
 dev_dependencies:
   flutter_test:
