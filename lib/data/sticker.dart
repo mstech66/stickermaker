@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class Sticker {
   String _name;
   String _publisher;

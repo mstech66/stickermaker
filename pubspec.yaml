@@ -22,6 +22,8 @@ dependencies:
   change_app_package_name: ^1.0.0
   flutter_image_compress: ^1.0.0
   image: ^3.1.0
+  animate_icons: ^2.0.0
+  lottie: ^1.2.1
 
 dev_dependencies:
   flutter_test:
@@ -32,7 +34,10 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
+  fonts:
+    - family: ProductSans
+      fonts:
+      - asset: assets/fonts/ProductSans-Regular.ttf
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -44,6 +49,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/
+    - assets/lottie/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
