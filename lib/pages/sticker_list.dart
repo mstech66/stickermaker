@@ -47,7 +47,7 @@ class _StickerListState extends State<StickerList>
             //     .showSnackBar(SnackBar(content: Text('Coming Soon...')));
           },
           child: Icon(
-            Icons.add,
+            Icons.add_rounded,
             color: Theme.of(context).accentColor,
           ),
         ),

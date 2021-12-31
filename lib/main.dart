@@ -30,7 +30,7 @@ class _AppRootState extends State<AppRoot> with TickerProviderStateMixin {
         primaryColor: primaryColor,
         accentColor: accentColor,
         textTheme: TextTheme(
-          headline1: TextStyle(fontSize: 28.0, color: accentColor, fontWeight: FontWeight.bold),
+          headline1: TextStyle(fontSize: 24.0, color: accentColor,),
           headline2: TextStyle(fontSize: 36.0, color: accentColor)
         )
       ),
