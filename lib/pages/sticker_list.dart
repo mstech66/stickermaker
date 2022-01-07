@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stickermaker/bloc/sticker_bloc.dart';
 
 class StickerList extends StatefulWidget {
   const StickerList({Key key}) : super(key: key);
@@ -8,60 +9,68 @@ class StickerList extends StatefulWidget {
   _StickerListState createState() => _StickerListState();
 }
 
-class _StickerListState extends State<StickerList>
-    with TickerProviderStateMixin {
+class _StickerListState extends State<StickerList> {
   final primaryColor = Colors.green[400];
   final accentColor = Colors.green[500];
-  AnimationController _animationController;
-  bool _isPlaying = false;
+  StickerBloc stickerBloc;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+    stickerBloc = BlocProvider.of<StickerBloc>(context);
+
+    stickerBloc.add(LoadStickers());
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: primaryColor,
-            title: Text(
-              'Sticker Maker',
-              style: Theme.of(context).textTheme.headline1,
+    return BlocBuilder<StickerBloc, StickerState>(
+      bloc: stickerBloc,
+      builder: (BuildContext context, StickerState state) {
+        return Scaffold(
+            appBar: AppBar(
+                automaticallyImplyLeading: false,
+                backgroundColor: primaryColor,
+                title: Text(
+                  'Sticker Maker',
+                  style: Theme.of(context).textTheme.headline1,
+                ),
+                shape: ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(16),
+                        bottomRight: Radius.circular(16)))),
+            floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+            floatingActionButton: FloatingActionButton(
+              backgroundColor: accentColor,
+              onPressed: () {
+                Navigator.pushNamed(context, '/addSticker');
+                // _messengerKey.currentState
+                //     .showSnackBar(SnackBar(content: Text('Coming Soon...')));
+              },
+              child: Icon(
+                Icons.add_rounded,
+                color: Theme.of(context).accentColor,
+              ),
             ),
-            shape: ContinuousRectangleBorder(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(16),
-                    bottomRight: Radius.circular(16)))),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: accentColor,
-          onPressed: () {
-            animateFab();
-            Navigator.pushNamed(context, '/addSticker');
-            // _messengerKey.currentState
-            //     .showSnackBar(SnackBar(content: Text('Coming Soon...')));
-          },
-          child: Icon(
-            Icons.add_rounded,
-            color: Theme.of(context).accentColor,
-          ),
-        ),
-        body: Center(
-          child: Text('Your stickers will show here'),
-        ));
-  }
-
-  animateFab() {
-    setState(() {
-      _isPlaying = !_isPlaying;
-      _isPlaying
-          ? _animationController.forward()
-          : _animationController.reverse();
-    });
+            body: state is StickerLoading
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : state.props.length == 0
+                    ? Center(
+                        child: Text("No stickers added 😛"),
+                      )
+                    : ListView.builder(
+                        itemCount: state.props.length,
+                        itemBuilder: (context, index) {
+                          var displayedSticker = state.props[index];
+                          print(displayedSticker);
+                          return ListTile(
+                            title: Text(displayedSticker.name),
+                          );
+                        },
+                      ));
+      },
+    );
   }
 }
