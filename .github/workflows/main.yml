@@ -28,7 +28,6 @@ jobs:
         with:
           channel: beta
       - run: flutter pub get
-      - run: flutter test
       - run: flutter build apk
       - name: Upload APK
         uses: actions/upload-artifact@v2
