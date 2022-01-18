@@ -16,6 +16,10 @@ import 'package:whatsapp_stickers/whatsapp_stickers.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class AddSticker extends StatefulWidget {
+  final Sticker sticker;
+
+  AddSticker({this.sticker});
+
   @override
   State<AddSticker> createState() => _AddStickerState();
 }
@@ -36,6 +40,10 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     stickerBloc = BlocProvider.of<StickerBloc>(context);
+    if (widget.sticker != null) {
+      _titleEditingController.text = widget.sticker.name;
+      loadImages();
+    }
   }
 
   @override
@@ -69,10 +77,10 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
               heroTag: 'saveBtn',
               backgroundColor: accentColor,
               onPressed: () {
-                saveStickerToDB();
-                print('whatsappSticker: $whatsappSticker');
-                stickerBloc.add(AddStickerEvent(whatsappSticker));
-                Navigator.pop(context);
+                if (widget.sticker != null)
+                  updateSticker();
+                else
+                  insertSticker();
               },
               child: Icon(
                 Icons.save_rounded,
@@ -139,8 +147,9 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
     var stickerTitle = _titleEditingController.value.text;
     const authorName = 'Manthan';
     var currentTimeStamp = DateTime.now().toUtc().millisecondsSinceEpoch;
+    var identifier = widget.sticker != null ? widget.sticker.identifier : generateRandomStickerId(stickerTitle);
     this.whatsappSticker = Sticker(
-        identifier: generateRandomStickerId(stickerTitle),
+        identifier: identifier,
         name: stickerTitle,
         publisher: authorName,
         publisherWebsite: '',
@@ -206,7 +215,8 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
             WhatsappStickerImage.fromFile(imgFile.path);
         List<String> emojisList = ['🙂', '😛'];
         stickerPack.addSticker(stickerImage, emojisList);
-        stickersMap.add(new WhatsappSticker(imgFile: imgFile.path, emojis: emojisList));
+        stickersMap.add(
+            new WhatsappSticker(imgFile: imgFile.path, emojis: emojisList));
       });
     });
   }
@@ -256,5 +266,28 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
         ),
       ),
     );
+  }
+
+  loadImages() {
+    List<WhatsappSticker> stickerList = widget.sticker.stickers;
+    for (var item in stickerList) {
+      convertedImageFileList.add(File(item.imgFile));
+      stickersMap
+          .add(new WhatsappSticker(imgFile: item.imgFile, emojis: item.emojis));
+    }
+  }
+
+  updateSticker() {
+    saveStickerToDB();
+    print('Sticker to be updated is $whatsappSticker');
+    stickerBloc.add(UpdateStickerEvent(whatsappSticker));
+    Navigator.pop(context);
+  }
+
+  insertSticker() {
+    saveStickerToDB();
+    print('whatsappSticker: $whatsappSticker');
+    stickerBloc.add(AddStickerEvent(whatsappSticker));
+    Navigator.pop(context);
   }
 }

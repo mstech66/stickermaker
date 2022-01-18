@@ -15,7 +15,9 @@ class StickerDao {
   }
 
   Future update(Sticker sticker) async {
+    print('Called update!');
     final finder = Finder(filter: Filter.byKey(sticker.identifier));
+    print(finder);
     await stickerStore.update(await _db, sticker.toMap(), finder: finder);
   }
 

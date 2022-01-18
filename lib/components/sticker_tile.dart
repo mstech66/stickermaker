@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:stickermaker/data/sticker.dart';
+import 'package:stickermaker/pages/add_sticker.dart';
 import 'package:stickermaker/styles/styles.dart';
 
 final Color cardColor = Color.fromRGBO(237, 237, 237, 1);
@@ -29,49 +30,51 @@ class _StickerTileState extends State<StickerTile> {
   @override
   Widget build(BuildContext context) {
     return Card(
-          elevation: 0,
-          color: cardColor,
-          shape: Styles.roundedBorderShape(),
-          margin: EdgeInsets.all(8),
-          child: InkWell(
-            splashColor: cardPlaceholderColor,
-            onTap: (){},
-            borderRadius: BorderRadius.circular(6),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: RichText(
-                      text: TextSpan(
-                          text: widget.sticker.name,
-                          style: TextStyle(
-                              color: Colors.black, fontFamily: 'ProductSans')),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
+      elevation: 0,
+      color: cardColor,
+      shape: Styles.roundedBorderShape(),
+      margin: EdgeInsets.all(8),
+      child: InkWell(
+        splashColor: cardPlaceholderColor,
+        onTap: () {
+          navigateToAddStickerPage(context, widget.sticker);
+        },
+        borderRadius: BorderRadius.circular(6),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              flex: 1,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: RichText(
+                  text: TextSpan(
+                      text: widget.sticker.name,
+                      style: TextStyle(
+                          color: Colors.black, fontFamily: 'ProductSans')),
+                  overflow: TextOverflow.ellipsis,
                 ),
-                Flexible(
-                  flex: 3,
-                  child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    if (stickerLength >= 3)
-                      ...widget.sticker.stickers
-                          .map((sticker) => fileImage(sticker.imgFile))
-                          .toList()
-                          .take(3)
-                    else ...[
-                      ...widget.sticker.stickers
-                          .map((sticker) => fileImage(sticker.imgFile))
-                          .toList(),
-                      ...returnPlaceholderList(3 - stickerLength)
-                    ],
-                    addToWhatsappButton()
-                  ]),
-                ),
-              ],
+              ),
             ),
+            Flexible(
+              flex: 3,
+              child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                if (stickerLength >= 3)
+                  ...widget.sticker.stickers
+                      .map((sticker) => fileImage(sticker.imgFile))
+                      .toList()
+                      .take(3)
+                else ...[
+                  ...widget.sticker.stickers
+                      .map((sticker) => fileImage(sticker.imgFile))
+                      .toList(),
+                  ...returnPlaceholderList(3 - stickerLength)
+                ],
+                addToWhatsappButton()
+              ]),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -146,4 +149,11 @@ Widget addToWhatsappButton() {
   );
 }
 
-
+navigateToAddStickerPage(context, sticker) {
+  Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => AddSticker(
+                sticker: sticker,
+              )));
+}
