@@ -35,6 +35,8 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
   Sticker whatsappSticker;
   StickerBloc stickerBloc;
   List<WhatsappSticker> stickersMap = [];
+  bool _isAutofocus = true;
+  final List<String> emojisList = ['🙂', '😛'];
 
   @override
   void initState() {
@@ -43,6 +45,7 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
     if (widget.sticker != null) {
       _titleEditingController.text = widget.sticker.name;
       loadImages();
+      _isAutofocus = false;
     }
   }
 
@@ -55,7 +58,7 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
                 title: TextField(
-                  autofocus: true,
+                  autofocus: _isAutofocus,
                   controller: _titleEditingController,
                   cursorColor: Colors.black54,
                   style: TextStyle(
@@ -113,6 +116,9 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
                         backgroundColor: accentColor,
                         onPressed: () async {
                           try {
+                            if(widget.sticker != null){
+                              addUpdatedToWhatsapp();
+                            }
                             await stickerPack.sendToWhatsApp();
                           } on WhatsappStickersException catch (e) {
                             print(e.cause);
@@ -147,7 +153,9 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
     var stickerTitle = _titleEditingController.value.text;
     const authorName = 'Manthan';
     var currentTimeStamp = DateTime.now().toUtc().millisecondsSinceEpoch;
-    var identifier = widget.sticker != null ? widget.sticker.identifier : generateRandomStickerId(stickerTitle);
+    var identifier = widget.sticker != null
+        ? widget.sticker.identifier
+        : generateRandomStickerId(stickerTitle);
     this.whatsappSticker = Sticker(
         identifier: identifier,
         name: stickerTitle,
@@ -213,7 +221,7 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
         });
         WhatsappStickerImage stickerImage =
             WhatsappStickerImage.fromFile(imgFile.path);
-        List<String> emojisList = ['🙂', '😛'];
+
         stickerPack.addSticker(stickerImage, emojisList);
         stickersMap.add(
             new WhatsappSticker(imgFile: imgFile.path, emojis: emojisList));
@@ -289,5 +297,24 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
     print('whatsappSticker: $whatsappSticker');
     stickerBloc.add(AddStickerEvent(whatsappSticker));
     Navigator.pop(context);
+  }
+
+  addUpdatedToWhatsapp() {
+    stickerPack = WhatsappStickers(
+      identifier: widget.sticker.identifier,
+      name: _titleEditingController.value.text,
+      publisher: 'Manthan',
+      trayImageFileName:
+          WhatsappStickerImage.fromAsset('assets/tray_Cuppy.png'),
+      publisherWebsite: '',
+      privacyPolicyWebsite: '',
+      licenseAgreementWebsite: '',
+    );
+
+    stickersMap.forEach((sticker) {
+      WhatsappStickerImage image =
+          WhatsappStickerImage.fromFile(sticker.imgFile);
+      stickerPack.addSticker(image, emojisList);
+    });
   }
 }
