@@ -9,7 +9,6 @@ import 'package:image/image.dart' as imagePkg;
 import 'package:path_provider/path_provider.dart';
 import 'package:stickermaker/bloc/sticker_bloc.dart';
 import 'package:stickermaker/data/WhatsappSticker.dart';
-import 'package:stickermaker/data/emoji.dart';
 import 'package:stickermaker/data/sticker.dart';
 import 'package:stickermaker/styles/styles.dart';
 import 'package:whatsapp_stickers/exceptions.dart';
@@ -144,6 +143,9 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
         identifier: generateRandomStickerId(stickerTitle),
         name: stickerTitle,
         publisher: authorName,
+        publisherWebsite: '',
+        privacyPolicyWebsite: '',
+        licenseAgreementWebsite: '',
         trayImageFileName: 'assets/tray_Cuppy.png',
         stickers: stickersMap,
         createTimeStamp: currentTimeStamp);

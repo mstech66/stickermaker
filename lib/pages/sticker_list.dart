@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stickermaker/bloc/sticker_bloc.dart';
+import 'package:stickermaker/components/sticker_tile.dart';
 
 class StickerList extends StatefulWidget {
   const StickerList({Key key}) : super(key: key);
@@ -61,13 +62,12 @@ class _StickerListState extends State<StickerList> {
                         child: Text("No stickers added 😛"),
                       )
                     : ListView.builder(
+                        padding: EdgeInsets.only(top: 32),
                         itemCount: state.props.length,
                         itemBuilder: (context, index) {
                           var displayedSticker = state.props[index];
                           print(displayedSticker);
-                          return ListTile(
-                            title: Text(displayedSticker.name),
-                          );
+                          return StickerTile(sticker: displayedSticker);
                         },
                       ));
       },
