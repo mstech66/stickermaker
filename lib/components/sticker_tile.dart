@@ -2,9 +2,11 @@ import 'dart:core';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:stickermaker/data/WhatsappSticker.dart';
 import 'package:stickermaker/data/sticker.dart';
 import 'package:stickermaker/pages/add_sticker.dart';
 import 'package:stickermaker/styles/styles.dart';
+import 'package:whatsapp_stickers/whatsapp_stickers.dart';
 
 final Color cardColor = Color.fromRGBO(237, 237, 237, 1);
 final Color cardPlaceholderColor = Color.fromRGBO(196, 196, 196, 1);
@@ -32,7 +34,7 @@ class _StickerTileState extends State<StickerTile> {
     return Card(
       elevation: 0,
       color: cardColor,
-      shape: Styles.roundedBorderShape(),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
       margin: EdgeInsets.all(8),
       child: InkWell(
         splashColor: cardPlaceholderColor,
@@ -73,6 +75,66 @@ class _StickerTileState extends State<StickerTile> {
                 addToWhatsappButton()
               ]),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  addStickerDataToWhatsapp() async {
+    Sticker sticker = widget.sticker;
+
+    print(sticker);
+
+    WhatsappStickers whatsappSticker = WhatsappStickers(
+      identifier: sticker.identifier,
+      name: sticker.name,
+      publisher: sticker.publisher,
+      trayImageFileName:
+          WhatsappStickerImage.fromAsset(sticker.trayImageFileName),
+      publisherWebsite: '',
+      privacyPolicyWebsite: '',
+      licenseAgreementWebsite: '',
+    );
+
+    Future.forEach(sticker.stickers, (sticker) {
+      WhatsappStickerImage image =
+          WhatsappStickerImage.fromFile(sticker.imgFile);
+      whatsappSticker.addSticker(image, sticker.emojis);
+    }).then((value) async {
+      await whatsappSticker.sendToWhatsApp();
+    });
+  }
+
+  Widget addToWhatsappButton() {
+    return Padding(
+      padding: const EdgeInsets.all(6.0),
+      child: InkWell(
+        splashColor: cardPlaceholderColor,
+        onTap: () {
+          print('Clicked!');
+          addStickerDataToWhatsapp();
+        },
+        child: Stack(
+          children: [
+            Card(
+              elevation: 0,
+              margin: EdgeInsets.all(0),
+              child: Container(
+                width: 50,
+                height: 50,
+              ),
+              color: cardPlaceholderColor,
+            ),
+            Positioned.fill(
+                child: Align(
+              alignment: Alignment.center,
+              child: Image.asset(
+                'assets/whatsapp.png',
+                width: 30,
+                height: 30,
+              ),
+            ))
           ],
         ),
       ),
@@ -120,33 +182,6 @@ List<Widget> returnPlaceholderList(int total) {
     ));
   }
   return placeholderList;
-}
-
-Widget addToWhatsappButton() {
-  return Padding(
-    padding: const EdgeInsets.all(6.0),
-    child: Stack(
-      children: [
-        Card(
-          elevation: 0,
-          child: Container(
-            width: 50,
-            height: 50,
-          ),
-          color: cardPlaceholderColor,
-        ),
-        Positioned.fill(
-            child: Align(
-          alignment: Alignment.center,
-          child: Image.asset(
-            'assets/whatsapp.png',
-            width: 30,
-            height: 30,
-          ),
-        ))
-      ],
-    ),
-  );
 }
 
 navigateToAddStickerPage(context, sticker) {

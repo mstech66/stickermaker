@@ -11,8 +11,8 @@ class StickerList extends StatefulWidget {
 }
 
 class _StickerListState extends State<StickerList> {
-  final primaryColor = Colors.green[400];
-  final accentColor = Colors.green[500];
+  final primaryColor = Color.fromRGBO(101, 217, 126, 1);
+  final accentColor = Color.fromRGBO(88, 189, 110, 1);
   StickerBloc stickerBloc;
 
   @override

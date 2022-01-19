@@ -33,6 +33,7 @@ class Sticker {
     return {
       'identifier': identifier,
       'name': name,
+      'publisher': publisher,
       'trayImageFileName': trayImageFileName,
       'publisherWebsite': publisherWebsite,
       'licenseAgreementWebsite': licenseAgreementWebsite,

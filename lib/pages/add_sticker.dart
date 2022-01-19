@@ -26,8 +26,8 @@ class AddSticker extends StatefulWidget {
 
 class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
   final _messengerKey = GlobalKey<ScaffoldMessengerState>();
-  final primaryColor = Colors.green[400];
-  final accentColor = Colors.green[500];
+  final primaryColor = Color.fromRGBO(101, 217, 126, 1);
+  final accentColor = Color.fromRGBO(88, 189, 110, 1);
   final whatsappAccentColor = Color.fromRGBO(37, 211, 102, 1);
   TextEditingController _titleEditingController = TextEditingController();
   List<File> convertedImageFileList = [];
@@ -116,7 +116,7 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
                         backgroundColor: accentColor,
                         onPressed: () async {
                           try {
-                            if(widget.sticker != null){
+                            if (widget.sticker != null) {
                               addUpdatedToWhatsapp();
                             }
                             await stickerPack.sendToWhatsApp();
@@ -151,7 +151,7 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
 
   saveStickerToDB() {
     var stickerTitle = _titleEditingController.value.text;
-    const authorName = 'Manthan';
+    var authorName = 'Manthan';
     var currentTimeStamp = DateTime.now().toUtc().millisecondsSinceEpoch;
     var identifier = widget.sticker != null
         ? widget.sticker.identifier
