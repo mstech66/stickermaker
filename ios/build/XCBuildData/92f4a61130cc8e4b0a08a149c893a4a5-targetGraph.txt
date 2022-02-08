@@ -1,0 +1,47 @@
+Target dependency graph (16 targets)
+DKImagePickerController-DKImagePickerController in Pods, no dependencies
+DKPhotoGallery-DKPhotoGallery in Pods, no dependencies
+SDWebImage in Pods, no dependencies
+SwiftyGif in Pods, no dependencies
+DKPhotoGallery in Pods, depends on:
+DKPhotoGallery-DKPhotoGallery in Pods (explicit)
+SDWebImage in Pods (explicit)
+SwiftyGif in Pods (explicit)
+DKImagePickerController in Pods, depends on:
+DKImagePickerController-DKImagePickerController in Pods (explicit)
+DKPhotoGallery in Pods (explicit)
+Flutter in Pods, no dependencies
+Mantle in Pods, no dependencies
+libwebp in Pods, no dependencies
+SDWebImageWebPCoder in Pods, depends on:
+SDWebImage in Pods (explicit)
+libwebp in Pods (explicit)
+YYImage in Pods, no dependencies
+file_picker in Pods, depends on:
+DKImagePickerController in Pods (explicit)
+Flutter in Pods (explicit)
+flutter_image_compress in Pods, depends on:
+Flutter in Pods (explicit)
+Mantle in Pods (explicit)
+SDWebImage in Pods (explicit)
+SDWebImageWebPCoder in Pods (explicit)
+path_provider in Pods, depends on:
+Flutter in Pods (explicit)
+whatsapp_stickers in Pods, depends on:
+Flutter in Pods (explicit)
+YYImage in Pods (explicit)
+libwebp in Pods (explicit)
+Pods-Runner in Pods, depends on:
+DKImagePickerController in Pods (explicit)
+DKPhotoGallery in Pods (explicit)
+Flutter in Pods (explicit)
+Mantle in Pods (explicit)
+SDWebImage in Pods (explicit)
+SDWebImageWebPCoder in Pods (explicit)
+SwiftyGif in Pods (explicit)
+YYImage in Pods (explicit)
+file_picker in Pods (explicit)
+flutter_image_compress in Pods (explicit)
+libwebp in Pods (explicit)
+path_provider in Pods (explicit)
+whatsapp_stickers in Pods (explicit)

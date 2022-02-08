@@ -1,0 +1,91 @@
+{
+  "_buildCommand2" : {
+    "command" : "prepareForIndexing",
+    "enableIndexBuildArena" : false,
+    "targets" : null
+  },
+  "buildCommand" : "build",
+  "configuredTargets" : [
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e985fd5cdb9993b1816141f0c012ffa62bd"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e9898fccba7a2febdedb43dddbf2e949fc3"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e989d0a1858a86fd6e6731ed20f88a1e515"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e98d3f65728b12dd217475d1283ee417937"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e989da425bb6d6d5d8dbb95e4afffb82217"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e982742fb9f3ddc293e43c65bab714408c6"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e98312b4bc59bbbe2c06c205bf4da6737f5"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e98c46180aea4e87057640961e6db37df0d"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e9837027570fe3a09bb9c7d0d2620332306"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e9872eabefc63c14dfe52fb0c95ad90294e"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e98d0d41fef3d11319235516d765282c624"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e98bf75f71a2aa7fdc38a7d7d70e6c200c1"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e98a2bbf608f3c1bb095bce8493cce06669"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e98459ecbbef4dbbe8a07a0c87bad0e0d1b"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e98d6b4f9cd0664e4caf87e0ca8814c7d76"
+    },
+    {
+      "guid" : "bfdfe7dc352907fc980b868725387e98b49392470957a7ab7f2c41d853024965"
+    }
+  ],
+  "containerPath" : "/Users/manthan/Documents/Projects/dev/stickermaker/ios/Pods/Pods.xcodeproj",
+  "continueBuildingAfterErrors" : true,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "",
+      "buildProductsPath" : "",
+      "derivedDataPath" : "/Users/manthan/Library/Developer/Xcode/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/manthan/Library/Developer/Xcode/DerivedData/Pods-guapkobmiipmabgwdmncfqqdfjpe/Index/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/manthan/Library/Developer/Xcode/DerivedData/Pods-guapkobmiipmabgwdmncfqqdfjpe/Index/PrecompiledHeaders",
+      "pchPath" : ""
+    },
+    "configurationName" : "Release",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ENABLE_PREVIEWS" : "NO"
+        }
+      }
+    }
+  },
+  "qos" : "default",
+  "schemeCommand" : "launch",
+  "schemeCommand2" : "launch",
+  "shouldCollectMetrics" : false,
+  "showNonLoggedProgress" : true,
+  "useDryRun" : true,
+  "useImplicitDependencies" : false,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : false
+}
