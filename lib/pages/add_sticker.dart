@@ -80,10 +80,22 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
               heroTag: 'saveBtn',
               backgroundColor: accentColor,
               onPressed: () {
-                if (widget.sticker != null)
-                  updateSticker();
-                else
-                  insertSticker();
+                dismissKeyboard();
+                if (widget.sticker != null) {
+                  if (_titleEditingController.text.length == 0) {
+                    showErrorSnackBar(
+                        "Please enter the name for stickerpack and then save");
+                  } else {
+                    updateSticker();
+                  }
+                } else {
+                  if (_titleEditingController.text.length == 0) {
+                    showErrorSnackBar("Empty Stickerpack Discarded");
+                    Navigator.pop(context);
+                  } else {
+                    insertSticker();
+                  }
+                }
               },
               child: Icon(
                 Icons.save_rounded,
@@ -251,7 +263,7 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
         customBorder: Styles.roundedBorderShape(),
         onTap: () async {
           if (_titleEditingController.value.text.isEmpty) {
-            showErrorSnackBar('Please Enter Title for your sticker pack');
+            showErrorSnackBar('Please enter title for your stickerpack');
           } else {
             FilePickerResult result =
                 await FilePicker.platform.pickFiles(allowMultiple: true);
@@ -288,6 +300,7 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
   updateSticker() {
     saveStickerToDB();
     print('Sticker to be updated is $whatsappSticker');
+    print('Length of sticker is...${whatsappSticker.stickers.length}');
     stickerBloc.add(UpdateStickerEvent(whatsappSticker));
     Navigator.pop(context);
   }
@@ -317,4 +330,8 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
       stickerPack.addSticker(image, emojisList);
     });
   }
+}
+
+dismissKeyboard() {
+  FocusManager.instance.primaryFocus?.unfocus();
 }
