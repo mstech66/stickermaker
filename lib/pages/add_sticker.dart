@@ -177,7 +177,8 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
         licenseAgreementWebsite: '',
         trayImageFileName: 'assets/tray_Cuppy.png',
         stickers: stickersMap,
-        createTimeStamp: currentTimeStamp);
+        createTimeStamp: currentTimeStamp,
+        animatedStickerPack: true);
   }
 
   Future installFromFileList(List<File> fileList, context) async {
@@ -191,6 +192,7 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
         publisherWebsite: '',
         privacyPolicyWebsite: '',
         licenseAgreementWebsite: '',
+        animatedStickerPack: true
       );
     }
     addImagesToWhatsapp(fileList, stickerPack);

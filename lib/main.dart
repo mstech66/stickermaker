@@ -36,6 +36,7 @@ class _AppRootState extends State<AppRoot> {
         return BlocProvider(
           create: (context) => StickerBloc(),
           child: MaterialApp(
+            debugShowCheckedModeBanner: false,
             scaffoldMessengerKey: _messengerKey,
             theme: ThemeData(
                 fontFamily: 'ProductSans',

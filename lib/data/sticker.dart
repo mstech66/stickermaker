@@ -11,6 +11,7 @@ class Sticker {
   String licenseAgreementWebsite = '';
   int createTimeStamp;
   List<WhatsappSticker> stickers = [];
+  bool animatedStickerPack;
 
   Sticker(
       {@required this.identifier,
@@ -21,7 +22,8 @@ class Sticker {
       this.publisherWebsite,
       this.licenseAgreementWebsite,
       this.privacyPolicyWebsite,
-      @required this.createTimeStamp});
+      @required this.createTimeStamp,
+      this.animatedStickerPack});
 
   Map<String, dynamic> toMap() {
     final Map<String, Object> data = Map<String, Object>();
@@ -39,7 +41,8 @@ class Sticker {
       'licenseAgreementWebsite': licenseAgreementWebsite,
       'privacyPolicyWebsite': privacyPolicyWebsite,
       'stickers': data['stickers'],
-      'createTimeStmap': createTimeStamp
+      'createTimeStmap': createTimeStamp,
+      'animatedStickerPack': animatedStickerPack
     };
   }
 
@@ -58,7 +61,8 @@ class Sticker {
                 .map((sticker) => WhatsappSticker.fromMap(sticker))
                 .toList()
             : null,
-        createTimeStamp: sticker['createTimeStamp']);
+        createTimeStamp: sticker['createTimeStamp'],
+        animatedStickerPack: sticker['animatedStickerPack']);
   }
 
   @override
