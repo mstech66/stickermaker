@@ -192,7 +192,7 @@ class _AddStickerState extends State<AddSticker> with TickerProviderStateMixin {
         publisherWebsite: '',
         privacyPolicyWebsite: '',
         licenseAgreementWebsite: '',
-        animatedStickerPack: true
+        // animatedStickerPack: true
       );
     }
     addImagesToWhatsapp(fileList, stickerPack);
