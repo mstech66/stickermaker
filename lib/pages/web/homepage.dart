@@ -31,11 +31,18 @@ class HomePage extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
+                  Text(
+                    'And, this link will not work cause I did not deploy to Play Store YET :D',
+                    style: Styles.paragraphTextStyle,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   new Image.asset(
                     'assets/images/google-play-badge.png',
                     height: 70,
                     fit: BoxFit.fill,
-                  )
+                  ),
                 ],
               ),
             ),
