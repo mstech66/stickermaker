@@ -24,12 +24,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-        with:
-          channel: stable
-          architecture: x64
       - uses: subosito/flutter-action@v1
         with:
-          channel: beta
+          channel: 'stable'
+          architecture: x64
       - run: flutter pub get
       - run: flutter build apk
       - name: Upload APK
